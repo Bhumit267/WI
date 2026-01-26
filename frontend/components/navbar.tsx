@@ -36,9 +36,13 @@ export function Navbar() {
                                 <User className="w-4 h-4" />
                                 {user.name}
                             </div>
-                            {user.role === 'ADMIN' && (
+                            {user.role === 'ADMIN' ? (
                                 <Link href="/admin">
                                     <Button variant="secondary" size="sm">Dashboard</Button>
+                                </Link>
+                            ) : (
+                                <Link href="/dashboard">
+                                    <Button variant="secondary" size="sm">My Complaints</Button>
                                 </Link>
                             )}
                             <Button variant="ghost" size="sm" onClick={logout} className="text-destructive hover:text-destructive hover:bg-destructive/10">

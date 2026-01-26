@@ -79,7 +79,7 @@ export default function TicketPage() {
                     <h1 className="text-3xl font-bold text-slate-900">PNR: {data.pnr}</h1>
                     <div className="flex items-center gap-2 text-slate-500 mt-1">
                         <span>Operator: <Link href={`/operators/${data.operator}`} className="text-primary hover:underline">{data.operator}</Link></span>
-                        <Badge variant={data.trustScore >= 4.0 ? "default" : "destructive"} className={data.trustScore >= 4.0 ? "bg-secondary hover:bg-secondary/80" : ""}>
+                        <Badge variant={data.trustScore >= 4.0 ? "default" : "destructive"} className={data.trustScore >= 4.0 ? "bg-green-600 hover:bg-green-700 text-white" : ""}>
                             Trust Score: {data.trustScore}/5.0
                         </Badge>
                     </div>

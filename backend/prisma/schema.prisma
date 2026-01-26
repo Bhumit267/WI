@@ -45,17 +45,7 @@ model Refund {
   updatedAt       DateTime @updatedAt
 }
 
-model Complaint {
-  id              String   @id @default(uuid())
-  pnr             String
-  ticket          Ticket   @relation(fields: [pnr], references: [pnr])
-  operatorId      String
-  operator        Operator @relation(fields: [operatorId], references: [id])
-  reason          String
-  status          String // PENDING, APPROVED, REJECTED
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-}
+
 
 model User {
   id        String   @id @default(uuid())
@@ -63,13 +53,34 @@ model User {
   password  String
   role      String   // ADMIN, USER
   name      String?
+  complaints Complaint[]
+  messages   Message[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-model AuditLog {
+model Complaint {
   id              String   @id @default(uuid())
-  action          String
-  details         String
+  pnr             String
+  ticket          Ticket   @relation(fields: [pnr], references: [pnr])
+  operatorId      String
+  operator        Operator @relation(fields: [operatorId], references: [id])
+  userId          String?
+  user            User?    @relation(fields: [userId], references: [id])
+  reason          String
+  status          String   // PENDING, OPEN, RESOLVED, ESCALATED
+  messages        Message[]
   createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Message {
+  id          String   @id @default(uuid())
+  complaintId String
+  complaint   Complaint @relation(fields: [complaintId], references: [id])
+  senderId    String
+  sender      User      @relation(fields: [senderId], references: [id])
+  content     String
+  read        Boolean   @default(false)
+  createdAt   DateTime  @default(now())
 }

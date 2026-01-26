@@ -108,7 +108,27 @@ async function main() {
         },
     });
 
-    console.log({ ticket1, ticket2, ticket3 });
+    // Create Complaint with Messages
+    const complaint = await prisma.complaint.upsert({
+        where: { id: 'demo-complaint' },
+        update: {},
+        create: {
+            id: 'demo-complaint',
+            pnr: 'RB102',
+            operatorId: operator.id,
+            userId: user.id,
+            reason: 'Refund amount mismatch',
+            status: 'OPEN',
+            messages: {
+                create: [
+                    { senderId: user.id, content: 'I was promised 100% refund but got 50%.' },
+                    { senderId: admin.id, content: 'We are investigating with the operator. Please hold.' }
+                ]
+            }
+        }
+    });
+
+    console.log({ ticket1, ticket2, ticket3, complaint });
 }
 
 main()
