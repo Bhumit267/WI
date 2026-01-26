@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { User, ShieldCheck, Send } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogTrigger } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
 
 const MOCK_MESSAGES = [
     { id: 1, sender: 'USER', text: 'I was promised 100% refund but got 50%.', time: '2 days ago' },
@@ -17,11 +19,20 @@ export default function ComplaintDetailPage() {
     const params = useParams();
     const [reply, setReply] = useState('');
     const [messages, setMessages] = useState(MOCK_MESSAGES);
+    const [justification, setJustification] = useState('');
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     const handleSend = () => {
         if (!reply.trim()) return;
         setMessages([...messages, { id: Date.now(), sender: 'ADMIN', text: reply, time: 'Just now' }]);
         setReply('');
+    };
+
+    const handleResolve = () => {
+        if (!justification.trim()) return;
+        // TODO: Call API to resolve
+        alert(`Complaint Resolved. Justification: "${justification}" logged to Audit Trail.`);
+        setIsDialogOpen(false);
     };
 
     return (
@@ -34,7 +45,33 @@ export default function ComplaintDetailPage() {
                     </h1>
                     <p className="text-slate-500">Refund Dispute • RB102</p>
                 </div>
-                <Button variant="outline">Mark Resolved</Button>
+
+                <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                    <DialogTrigger asChild>
+                        <Button variant="outline">Mark Resolved</Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle>Confirm Resolution</DialogTitle>
+                            <DialogDescription>
+                                This action will be logged in the immutable Audit Trail. Please provide a justification.
+                            </DialogDescription>
+                        </DialogHeader>
+                        <div className="space-y-2 py-4">
+                            <Label htmlFor="justification">Reason for Resolution</Label>
+                            <Input
+                                id="justification"
+                                placeholder="e.g. Refund verified by bank statement..."
+                                value={justification}
+                                onChange={(e) => setJustification(e.target.value)}
+                            />
+                        </div>
+                        <DialogFooter>
+                            <Button variant="ghost" onClick={() => setIsDialogOpen(false)}>Cancel</Button>
+                            <Button onClick={handleResolve} disabled={!justification.trim()}>Confirm Resolve</Button>
+                        </DialogFooter>
+                    </DialogContent>
+                </Dialog>
             </div>
 
             <Card className="h-[600px] flex flex-col">

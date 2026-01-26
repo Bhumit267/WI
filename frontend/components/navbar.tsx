@@ -24,11 +24,14 @@ export function Navbar() {
                     <Link href="/lookup" className="text-sm font-medium hover:text-primary transition-colors">
                         Lookup PNR
                     </Link>
+                    <Link href="/operators" className="text-sm font-medium hover:text-primary transition-colors">
+                        Operators
+                    </Link>
+                    <Link href="/how-it-works" className="text-sm font-medium hover:text-primary transition-colors">
+                        How it Works
+                    </Link>
                     <Link href="/complaints" className="text-sm font-medium hover:text-primary transition-colors">
                         Complaints
-                    </Link>
-                    <Link href="/transparency" className="text-sm font-medium hover:text-primary transition-colors">
-                        Transparency
                     </Link>
                     {user ? (
                         <div className="flex items-center gap-4">

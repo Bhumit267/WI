@@ -55,8 +55,38 @@ model User {
   name      String?
   complaints Complaint[]
   messages   Message[]
+  auditLogs  AuditLog[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model AuditLog {
+  id          String   @id @default(uuid())
+  action      String   // E.g., "RESOLVE_COMPLAINT"
+  targetId    String   // ID of the object (Complaint/Operator)
+  details     String
+  justification String? // Required for sensitive actions
+  performedBy String
+  user        User     @relation(fields: [performedBy], references: [id])
+  createdAt   DateTime @default(now())
+}
+
+model TrustScoreLog {
+  id          String   @id @default(uuid())
+  operatorId  String
+  operator    Operator @relation(fields: [operatorId], references: [id])
+  oldScore    Float
+  newScore    Float
+  reason      String   // "SLA Violation", "Complaint Escalation"
+  createdAt   DateTime @default(now())
+}
+
+model SLAConfig {
+  id          String   @id @default(uuid())
+  type        String   // "REFUND_TIMEOUT", "COMPLAINT_RESPONSE"
+  threshold   Int      // Hours, e.g., 48
+  penalty     Float    // Trust score deduction, e.g., 0.5
+  updatedAt   DateTime @updatedAt
 }
 
 model Complaint {

@@ -128,6 +128,25 @@ async function main() {
         }
     });
 
+    // Create SLA Config
+    await prisma.sLAConfig.createMany({
+        data: [
+            { type: 'REFUND_TIMEOUT', threshold: 48, penalty: 0.5 },
+            { type: 'COMPLAINT_RESPONSE', threshold: 24, penalty: 0.2 },
+        ]
+    });
+
+    // Create Audit Log
+    await prisma.auditLog.create({
+        data: {
+            action: 'SYSTEM_INIT',
+            targetId: 'SYSTEM',
+            details: 'Initial system seed completed',
+            performedBy: admin.id,
+            justification: 'Setup'
+        }
+    });
+
     console.log({ ticket1, ticket2, ticket3, complaint });
 }
 
