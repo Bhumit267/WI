@@ -37,55 +37,31 @@ It acts as an independent auditor layer where passengers can trace their ticket 
 
 ## 🧭 Page Guide & Features
 
-This project contains the following key pages and functionalities:
+### 1. **Public Transparency Pages**
+- **How It Works (`/how-it-works`)**: Visual "Trust Layer" explanation and Limitations.
+- **Data Transparency (`/data-transparency`)**: Explicit policy on what data is Stored vs. Derived vs. Never Collected.
+- **system Status (`/status`)**: Real-time system availability dashboard.
+- **SLA & Penalties (`/sla`)**: Public rules on Refund Timelines (48h) and Trust Score deductions.
 
-### 1. **Landing Page (`/`)**
-The public-facing home page.
-*   **Hero Section**: Explains the "Fair Refunds" mission.
-*   **Call to Action**: "Check Your Refund" takes users to the lookup tool.
-*   **Value Props**: Highlights "Locked Policies" and "Trust Scores".
+### 2. **Operator Ecosystem**
+- **Partner Directory (`/operators`)**: Public list of all monitored operators with Trust Scores and Refund stats.
+- **Dispute History (`/operators/[name]/disputes`)**: Read-only record of grievances and resolution times per operator.
 
-### 2. **Trace Your Refund (`/lookup`)**
-A simple, secure search interface.
-*   **Functionality**: Users enter their PNR (Passenger Name Record).
-*   **Demo Data**: To test, use PNRs `RB101` (Active), `RB102` (Cancelled), or `RB103` (Refunded).
+### 3. **Passenger Tools**
+- **Refund Trace (`/lookup`)**: Enter PNR and trace the exact status of your money.
+- **Ticket Audit (`/tickets/[pnr]`)**: View Locked Policy, Refund Tracker, and Operator Performance.
+- **User Dashboard (`/dashboard`)**: Track personal complaints and file new grievances.
+- **Public Complaints (`/complaints`)**: Open ledger of recent issues.
 
-### 3. **Ticket Transparency (`/tickets/[pnr]`)**
-The core audit view for a specific ticket.
-*   **Header**: Shows Operator Name, PNR, Status, and **Trust Score Badge** (Green for high trust, Red for low).
-*   **Refund Tracker**: A vertical timeline showing every step of the refund (Booked -> Cancelled -> Initiated -> Processed).
-*   **Locked Policy**: Displays the exact cancellation terms (e.g., "50% refund if cancelled 12h before") that were active at booking.
-*   **Refund Details**: Shows the exact amount refundable and the deadline for the operator to pay.
+### 4. **Governance & Regulation**
+- **Regulator Dashboard (`/admin`)**: Command center for monitoring Delayed Refunds and Market Trust.
+- **Audit Logs (`/admin/audit`)**: Immutable record of all sensitive admin actions (e.g., resolving complaints).
+- **Complaint Management (`/admin/complaints`)**: Chat interface to directly resolve disputes with justification logging.
 
-### 4. **Operator Profile (`/operators/[name]`)**
-A public profile for each bus operator (e.g., Kaveri Travels).
-*   **Trust Score**: An aggregate rating (0-5.0) based on their refund speed and policy adherence.
-*   **Badges**: Awards like "Fast Refund" or "Verified Policy".
-*   **Stats**: Average Refund Time (hours) and Complaint Count.
-
-### 5. **Public Complaints (`/complaints`)**
-A transparency log of all recent grievance filings.
-*   **List View**: Shows recent complaints against operators.
-*   **Status Tags**: `Resolved`, `Escalated`, `Pending`.
-*   **Purpose**: Creates public pressure on operators to resolve issues.
-
-### 6. **User Dashboard (`/dashboard`)**
-**[Requires Login]** - The personal area for passengers.
-*   **My Complaints**: A list of grievances filed by the logged-in user.
-*   **New Complaint (`/dashboard/new`)**: A form to submit a new issue (PNR, Reason, Description).
-
-### 7. **Regulator Dashboard (`/admin`)**
-**[Requires Login]** - The command center for government regulators.
-*   **Overview**: Key metrics like "Delayed Refunds" (Violating 48h SLA) and "Market Trust".
-*   **Worst Performers**: A table listing operators with the highest failure rates.
-*   **Complaints Management (`/admin/complaints`)**:
-    *   **List**: All open complaints from all users.
-    *   **Detail View (`/admin/complaints/[id]`)**: A chat interface where Admins can DM users directly to resolve disputes.
-
-### 8. **Authentication (`/login`)**
-Demonstration of Role-Based Access Control (RBAC).
-*   **Admin Access**: Email: `admin@gmail.com` | Pass: `admin123` -> Redirects to `/admin`.
-*   **User Access**: Email: `user1@gmail.com` | Pass: `user123` -> Redirects to `/dashboard`.
+### 5. **Authentication (`/login`)**
+Role-Based Access Control (RBAC) demonstration.
+*   **Admin**: `admin@gmail.com` / `admin123`
+*   **User**: `user1@gmail.com` / `user123`
 
 ---
 
@@ -93,7 +69,7 @@ Demonstration of Role-Based Access Control (RBAC).
 
 This is a **Reference Implementation** focusing on the "Transparency Pattern".
 *   The **Frontend** uses a robust Mock Data and Mock Auth implementation to demonstrate the full UX without requiring a live banking integration.
-*   The **Backend** code is fully written in the `backend/` folder (Schema & Seed) but the frontend runs independently for demonstration purposes.
+*   The **Backend** code is fully written in the `backend/` folder but is optional for the UI demonstration.
 
 ---
 
