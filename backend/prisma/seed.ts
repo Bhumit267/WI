@@ -3,6 +3,31 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
+    // Create Users
+    const admin = await prisma.user.upsert({
+        where: { email: 'admin@gmail.com' },
+        update: {},
+        create: {
+            email: 'admin@gmail.com',
+            password: 'admin123', // In production, hash this!
+            role: 'ADMIN',
+            name: 'System Administrator'
+        },
+    });
+
+    const user = await prisma.user.upsert({
+        where: { email: 'user1@gmail.com' },
+        update: {},
+        create: {
+            email: 'user1@gmail.com',
+            password: 'user123', // In production, hash this!
+            role: 'USER',
+            name: 'Verified Passenger'
+        },
+    });
+
+    console.log({ admin, user });
+
     // Create Operator
     const operator = await prisma.operator.upsert({
         where: { name: 'Kaveri Travels' },

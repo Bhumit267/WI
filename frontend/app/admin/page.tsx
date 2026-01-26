@@ -1,11 +1,31 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/context/auth-context';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { AlertCircle, FileWarning } from 'lucide-react';
+import { AlertCircle, FileWarning, Loader2 } from 'lucide-react';
 
 export default function AdminPage() {
+    const { user, isLoading } = useAuth();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (!isLoading && (!user || user.role !== 'ADMIN')) {
+            router.push('/login');
+        }
+    }, [user, isLoading, router]);
+
+    if (isLoading || !user || user.role !== 'ADMIN') {
+        return (
+            <div className="flex h-screen items-center justify-center">
+                <Loader2 className="w-8 h-8 animate-spin text-primary" />
+            </div>
+        );
+    }
+
     return (
         <div className="container py-8 space-y-8">
             <div className="flex justify-between items-center">
