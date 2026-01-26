@@ -40,7 +40,7 @@ export default function Home() {
                     Check Your Refund <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
-                <Link href="/transparency">
+                <Link href="/how-it-works">
                   <Button variant="outline" size="lg">
                     How it Works
                   </Button>
