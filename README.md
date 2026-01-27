@@ -6,6 +6,8 @@ OpenFare is a government-grade **transparency and accountability platform** for 
 
 It acts as an independent auditor layer where passengers can trace their ticket lifecycle, verify policies, and check operator reliability without the conflict of interest inherent in ticket sales.
 
+🌐 **Live Demo:** [https://openfair.netlify.app/](https://openfair.netlify.app/)
+
 ---
 
 ## 🚀 Unique Selling Propositions (USP)

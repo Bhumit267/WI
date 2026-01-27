@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: openfare-backend
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm run db:push && npm run db:seed:prod && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+    disk:
+      name: openfare-data
+      mountPath: /data
+      sizeGB: 1
