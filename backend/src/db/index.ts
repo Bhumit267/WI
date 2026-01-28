@@ -6,8 +6,11 @@ import path from 'path';
 
 dotenv.config();
 
-// Ensure db file location is correct relative to execution
-const dbPath = path.resolve(__dirname, '../../openfare.db');
+// Use DATABASE_PATH env var for production (e.g., /data/openfare.db on Render)
+// Fallback to local path for development
+const dbPath = process.env.DATABASE_PATH || path.resolve(__dirname, '../../openfare.db');
+
+console.log(`[DB] Using database at: ${dbPath}`);
 
 const sqlite = new Database(dbPath);
 const db = drizzle(sqlite, { schema });
