@@ -63,8 +63,12 @@ It acts as an independent auditor layer where passengers can trace their ticket 
 
 ### 5. **Authentication (`/login`)**
 Role-Based Access Control (RBAC) demonstration.
-*   **Admin**: `admin@gmail.com` / `admin123`
-*   **User**: `user1@gmail.com` / `user123`
+*   **Admin**: `admin@openfare.gov` / `admin123`
+*   **Users**:
+    - `bhumit@gmail.com` / `bhumit123`
+    - `vedant@gmail.com` / `vedant123`
+    - `pranathi@gmail.com` / `pranathi123`
+    - `rajesh.kumar@gmail.com` / `user123`
 
 ---
 
