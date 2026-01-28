@@ -52,6 +52,17 @@ async function main() {
             users.push(u);
         }
 
+        // Custom users with individual passwords
+        const bhumitPassword = await bcrypt.hash('bhumit123', SALT_ROUNDS);
+        const vedantPassword = await bcrypt.hash('vedant123', SALT_ROUNDS);
+        const pranathiPassword = await bcrypt.hash('pranathi123', SALT_ROUNDS);
+
+        const bhumit = await insertUser('bhumit@gmail.com', 'USER', 'Bhumit', bhumitPassword);
+        const vedant = await insertUser('vedant@gmail.com', 'USER', 'Vedant', vedantPassword);
+        const pranathi = await insertUser('pranathi@gmail.com', 'USER', 'Pranathi', pranathiPassword);
+
+        users.push(bhumit, vedant, pranathi);
+
         console.log(`✅ Created ${users.length + 1} users\n`);
 
         // ============================================================================
