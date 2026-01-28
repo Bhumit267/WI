@@ -31,8 +31,9 @@ It acts as an independent auditor layer where passengers can trace their ticket 
 
 ### Backend (Separated Service)
 - **Runtime**: Node.js & Express
-- **Database**: PostgreSQL
-- **ORM**: [Prisma](https://www.prisma.io/)
+- **Database**: SQLite (file-based, lightweight)
+- **ORM**: [Drizzle ORM](https://orm.drizzle.team/)
+- **Auth**: JWT-based authentication
 - **Architecture**: REST API with clear separation of concerns
 
 ---
@@ -64,6 +65,21 @@ It acts as an independent auditor layer where passengers can trace their ticket 
 Role-Based Access Control (RBAC) demonstration.
 *   **Admin**: `admin@gmail.com` / `admin123`
 *   **User**: `user1@gmail.com` / `user123`
+
+---
+
+## 🚀 Deployment
+
+### One-Click Deploy to Render
+
+1. Push your code to GitHub.
+2. Go to [Render Dashboard](https://dashboard.render.com/) → **New +** → **Blueprint**.
+3. Connect your repository. Render auto-detects `render.yaml`.
+4. Click **Apply**.
+
+> **Note:** Persistent disk (for SQLite data) requires a paid Render plan. On Free Tier, data resets on each deploy.
+
+See [`backend/DEPLOY.md`](backend/DEPLOY.md) for detailed instructions.
 
 ---
 
